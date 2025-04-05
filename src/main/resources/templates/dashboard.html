@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <nav class="bg-white shadow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <span class="text-xl font-semibold">Attendance System</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="mr-4" th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="text-blue-500 hover:underline">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <div class="px-4 py-6 sm:px-0">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-semibold mb-4">Today's Attendance</h2>
+                    <div class="flex space-x-4 mb-6">
+                        <form th:action="@{/attendance/check-in}" method="post">
+                            <button type="submit" 
+                                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+                                Check In
+                            </button>
+                        </form>
+                        <form th:action="@{/attendance/check-out}" method="post">
+                            <button type="submit" 
+                                    class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+                                Check Out
+                            </button>
+                        </form>
+                    </div>
+                    <div th:if="${currentAttendance != null}" class="mb-6">
+                        <p class="font-medium">Current Status: <span class="text-green-600">Checked In</span></p>
+                        <p>Checked in at: <span th:text="${#temporals.format(currentAttendance.checkIn, 'hh:mm a')}"></span></p>
+                    </div>
+                    <div th:unless="${currentAttendance != null}" class="mb-6">
+                        <p class="font-medium">Current Status: <span class="text-red-600">Not Checked In</span></p>
+                    </div>
+
+                    <div class="border-t pt-4">
+                        <h3 class="font-semibold mb-2">Today's Attendance History</h3>
+                        <div th:if="${!todayAttendance.isEmpty()}">
+                            <div th:each="attendance : ${todayAttendance}" class="mb-2 p-2 bg-gray-50 rounded">
+                                <p>Check-in: <span th:text="${#temporals.format(attendance.checkIn, 'hh:mm a')}"></span></p>
+                                <p th:if="${attendance.checkOut != null}">
+                                    Check-out: <span th:text="${#temporals.format(attendance.checkOut, 'hh:mm a')}"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <p th:if="${todayAttendance.isEmpty()}" class="text-gray-500">No attendance records for today</p>
+                    </div>
+
+                    <div class="mt-6">
+                        <a th:href="@{/attendance/history}" class="text-blue-500 hover:underline">
+                            View Full Attendance History
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
