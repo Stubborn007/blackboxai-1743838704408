@@ -1,0 +1,11 @@
+/project/sandbox/user-workspace/src/main/java/com/attendance/model/Attendance.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/controller/RegistrationController.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/controller/AttendanceController.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/repository/AttendanceRepository.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/AttendanceManagementApplication.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/model/Employee.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/controller/DashboardController.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/config/SecurityConfig.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/service/AttendanceService.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/service/EmployeeService.java
+/project/sandbox/user-workspace/src/main/java/com/attendance/repository/EmployeeRepository.java
